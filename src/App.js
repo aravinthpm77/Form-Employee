@@ -1,10 +1,14 @@
-
+import {BrowserRouter} from 'react-router-dom';
+import AllRoutes from './Routes.jsx'
 import './App.css';
 
 function App() {
   return (
-    <div className='app-container'>
-      
+    <div >
+      <BrowserRouter>
+        <AllRoutes/>
+      </BrowserRouter>
+
     </div>
   );
 }
