@@ -9,6 +9,9 @@ const Home = () =>{
                     <img src={img1} alt="Image1"  />
                 </div>  
                 <form>
+                    <div className='form-text-con'>
+                        <p>Employee Details</p>
+                    </div>
                     <div className='inpute'>
                         <input type="text" placeholder="Name" />
                         <input type="date" />
