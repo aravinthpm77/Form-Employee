@@ -1,5 +1,4 @@
 .form-con{
-
     min-width: 100vh;
     min-height: 100vh;
     background-image: url('../../assets/bg2.jpg');
@@ -29,6 +28,7 @@
     margin-top: 50px;
     max-width: 850px;
     margin-left: 350px;
+    
     border-radius: 10px;
     background-color: white;
     box-shadow: 10px 10px 57px 1px rgba(0, 0, 0, 0.2) ,11px 4px 16px rgba(0, 0, 0, 0.2);
@@ -36,7 +36,7 @@
 }
 .text-area img{
     min-width: 400px;
-    max-height:625px;
+    max-height:635px;
     margin-bottom: -5px;
     border-radius: 10px 0 0 10px;
 }
@@ -44,8 +44,8 @@ form{
     max-width:400px;
     padding-top:10px ;
 }
-form .form-text-con{
-    margin-left: 100px;
+form .form-text-con p{
+    margin-left: 125px;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 20px;
     letter-spacing: .04rem;
@@ -64,6 +64,42 @@ form input{
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     height: 50px;
     width: 250px;
+    border-radius: 5px;
+}
+form .date-age{
+    display: flex;
+    margin-bottom: -10px;
+}
+form .date-age p{
+    margin-left: 20px;
+    background-color: #f1f1f1;
+    
+    padding-top: 15px;
+    
+    font-size: 15px;
+    font-weight: 100;
+    letter-spacing: .08rem;
+    padding-left:20px ;
+    padding-right: 25px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    height: 35px;
+    width: 60px;
+    border-radius: 5px;   
+}
+
+form .age-input{
+    float: left;
+    margin-left: 50px;
+    border:none;
+    background-color: #f1f1f1;
+    font-size: 15px;
+    font-weight: 100;
+    letter-spacing: .08rem;
+    padding-left:30px ;
+    padding-right: 15px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    height: 50px;
+    width: 125px;
     border-radius: 5px;
 }
 
