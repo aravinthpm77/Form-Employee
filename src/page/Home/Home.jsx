@@ -2,11 +2,12 @@ import React, { useRef, useState } from 'react'
 import axios from 'axios'
 import './Home.css'
 import img1 from '../../assets/bg3.jpg'
+import { useNavigate } from 'react-router-dom'
 const Home = () =>{
 
-
-    const [birthDate, setBirthDate] = useState('');
-    const [age, setAge] = useState(null);
+    const Navigate =useNavigate()
+    const[birthDate, setBirthDate] = useState('');
+    const[age, setAge] = useState(null);
     const[Name,setName]=useState('');
     const[Experience,setExperience]=useState('')
     const[Department,setDepartment]=useState('');
@@ -17,12 +18,28 @@ const Home = () =>{
 
     const formRef=useRef(null);
 
-    
+    const handleReset = () => {
+        
+        const shouldReset = window.confirm("Are you sure you want to reset the form?");
+        if (shouldReset) {
+         
+          formRef.current.reset();
+         
+          setBirthDate('');
+          setAge(null);
+          setName('');
+          setExperience('');
+          setDepartment('');
+          setAddress('');
+          setEmployeeID('');
+          setSalary('');
+          setDestination('');
+        }
+    }
     
     const calculateAge = (birthDate) => {
         const currentDate = new Date();
         const birthDateObj = new Date(birthDate);
-
         let calculatedAge = currentDate.getFullYear() - birthDateObj.getFullYear();
 
         if(
@@ -36,9 +53,6 @@ const Home = () =>{
         ) {
         calculatedAge--;
         }
-        
-        
-
         return calculatedAge;
     };
     const handleBirthDateChange = (e) => {
@@ -64,9 +78,9 @@ const Home = () =>{
         .then(
         res=>alert("Successfully Inserted "))
 
-        .catch(err=>console.log(err,"error"));
-
-         formRef.current.reset();
+        .catch(err=>alert(err,"error"));
+        Navigate('/DisplayData')
+        formRef.current.reset();
     }
     
     return (
@@ -81,23 +95,24 @@ const Home = () =>{
                     </div>
                     
                     <div className='inpute'>
-                        <input type="text" placeholder="Name"  onChange={(e)=>{setName(e.target.value)}} />
+                        <input type="text" placeholder="Name"  onChange={(e)=>{setName(e.target.value)}} required/>
                         
                         <div className='date-age'>
                             <input type="date"  value={birthDate} className='age-input' 
-                            onChange={handleBirthDateChange} placeholder='Date of Birth'  />
+                            onChange={handleBirthDateChange} placeholder='Date of Birth' required />
                             
                             <p>Age: {age==null ||age}</p>
                         </div>
-                        <input type="number" placeholder='Experience'  onChange={(e)=>{setExperience(e.target.value)}}/>
-                        <input type="text" placeholder="Dept you worked" onChange={(e)=>{setDepartment(e.target.value)}}/>
-                        <input type="text" placeholder="Address" onChange={(e)=>{setAddress(e.target.value)}}/>
-                        <input type="number" placeholder="Empy-ID" onChange={(e)=>{setEmployeeID(e.target.value)}}/>
-                        <input type="number" placeholder="Salary Details" onChange={(e)=>{setSalary(e.target.value)}}/>
-                        <input type="text" placeholder="Destination" onChange={(e)=>{setDestination(e.target.value)}}/>
+                        <input type="number" placeholder='Experience'  onChange={(e)=>{setExperience(e.target.value)}} required/>
+                        <input type="text" placeholder="Dept you worked" onChange={(e)=>{setDepartment(e.target.value)}} required/>
+                        <input type="text" placeholder="Address" onChange={(e)=>{setAddress(e.target.value)}} required/>
+                        <input type="number" placeholder="Empy-ID" onChange={(e)=>{setEmployeeID(e.target.value)}} required/>
+                        <input type="number" placeholder="Salary Details" onChange={(e)=>{setSalary(e.target.value)}} required/>
+                        <input type="text" placeholder="Destination" onChange={(e)=>{setDestination(e.target.value)}} required/>
                         
                     </div>
-                    <button type="submit" >Submit</button>
+                    <button type="submit" className='sumbtn' >Submit</button>
+                    <button type="reset" className='rstbtn' id='rstbtn' onClick={handleReset}>Reset</button>
                                 
                 </form>
             </div>
