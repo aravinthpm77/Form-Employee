@@ -108,7 +108,7 @@ const Home = () =>{
                         <input type="text" placeholder="Address" onChange={(e)=>{setAddress(e.target.value)}} required/>
                         <input type="number" placeholder="Empy-ID" onChange={(e)=>{setEmployeeID(e.target.value)}} required/>
                         <input type="number" placeholder="Salary Details" onChange={(e)=>{setSalary(e.target.value)}} required/>
-                        <input type="text" placeholder="Destination" onChange={(e)=>{setDestination(e.target.value)}} required/>
+                        <input type="text" placeholder="Designation" onChange={(e)=>{setDestination(e.target.value)}} required/>
                         
                     </div>
                     <button type="submit" className='sumbtn' >Submit</button>
