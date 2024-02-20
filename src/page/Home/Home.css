@@ -82,6 +82,16 @@ form input{
     width: 250px;
     border-radius: 5px;
 }
+form .Depart{
+    display:grid;
+    font-weight: lighter;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-top: 20px;
+    margin-left: 50px;
+}
+form .Departments{
+    margin-left: 50px;
+}
 form .date-age{
     display: flex;
     margin-bottom: -10px;

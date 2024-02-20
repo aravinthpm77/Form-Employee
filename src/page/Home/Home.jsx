@@ -4,48 +4,16 @@ import './Home.css'
 import img1 from '../../assets/bg3.jpg'
 import '../DisplayData/DisplayData.css';
 import { NavLink } from 'react-router-dom';
-const Home = () =>{
 
-    useEffect(() => {
-    
-        fetchEmployeeData();
-    }, []);
 
-    
+const FirstPage = ({onNext}) =>{
+
     const[birthDate, setBirthDate] = useState('');
     const[age, setAge] = useState(null);
     const[Name,setName]=useState('');
     const[Experience,setExperience]=useState('');
     const[Department,setDepartment]=useState('');
-    const[Address,setAddress]=useState('');
-    const[EmployeeID,setEmployeeID]=useState('');
-    const[Salary,setSalary]=useState('');
-    const[Destination,setDestination]=useState('');
-
-    const [formSubmitted,setformsubmitted]=useState(false);
     
-    const formRef=useRef(null);
-    
-    
-    const handleReset = () => {
-        
-        const shouldReset = window.confirm("Are you sure you want to reset the form?");
-        if (shouldReset) {
-        
-          formRef.current.reset();
-         
-          setBirthDate('');
-          setAge(null);
-          setName('');
-          setExperience('');
-          setDepartment('');
-          setAddress('');
-          setEmployeeID('');
-          setSalary('');
-          setDestination('');
-        }
-        
-    }
     
     const calculateAge = (birthDate) => {
         const currentDate = new Date();
@@ -70,6 +38,8 @@ const Home = () =>{
         }
         return calculatedAge;
     };
+
+
     const handleBirthDateChange = (e) => {
         const newBirthDate = e.target.value;
         setBirthDate(newBirthDate);
@@ -86,34 +56,21 @@ const Home = () =>{
         setAge(null);
         }
     };
-    const handleSubmit =(e)=>{
-        e.preventDefault();
-        console.log("1");
-        console.log(Name,birthDate, age,Experience,Department,Address,EmployeeID,Salary,Destination,11);
-        axios.post('http://localhost:5000/Employee',{Name,birthDate, age,Experience,Department,Address,EmployeeID,Salary,Destination})
-        .then(
-        res=>alert("Successfully Inserted "))
-        
-        .catch(err=>alert(err,"error"));
-        
-        setformsubmitted(true);
-        
-        formRef.current.reset();
-    }
-
-    const [employeeData, setEmployeeData] = useState([]);
-
     
 
-    const fetchEmployeeData = async () => {
-        try {
-        const response = await axios.get('http://localhost:5000/employee');
-        
-        setEmployeeData(response.data);
-        } catch (error) {
-        console.error('Error fetching employee data:', error);
-        }
-    };
+
+  const handleDepartment = (event) => {
+    setDepartment(event.target.value);
+    
+  };
+
+
+  
+  const handleNext = ()=>{
+
+    console.log(Name,birthDate,age,Experience,Department);
+    onNext({Name,birthDate, age,Experience,Department});
+  }
     
     return (
         <div className='Main_class'>
@@ -122,9 +79,10 @@ const Home = () =>{
                     <div className='text-area'>
                         <img src={img1} alt="Image1"  />
                     </div>  
-                    <form  ref={formRef} onSubmit={handleSubmit}>
+                    <form  >
                         <div className='form-text-con'>
                             <p>Employee Details</p>
+                            <p>Page 1</p>
                         </div>
                         
                         <div className='inpute'>
@@ -137,28 +95,152 @@ const Home = () =>{
                                 <p>Age: {age==null ||age}</p>
                             </div>
                             <input type="number" placeholder='Experience'  onChange={(e)=>{setExperience(e.target.value)}} required/>
-                            <input type="text" placeholder="Dept you worked" onChange={(e)=>{setDepartment(e.target.value)}} required/>
-                            <input type="text" placeholder="Address" onChange={(e)=>{setAddress(e.target.value)}} required/>
-                            <input type="number" placeholder="Empy-ID" onChange={(e)=>{setEmployeeID(e.target.value)}} required/>
-                            <input type="number" placeholder="Salary Details" onChange={(e)=>{setSalary(e.target.value)}} required/>
-                            <input type="text" placeholder="Designation" onChange={(e)=>{setDestination(e.target.value)}} required/>
                             
-                        </div>
-                        <button type="submit" className='sumbtn' >Submit</button>
-                        <button type="reset" className='rstbtn' id='rstbtn' onClick={handleReset}>Reset</button>
-                                    
+                            <label for="Department" className='Depart'>Choose Department</label>
+                            <select className='Departments' id="depart" name="Departments" onChange={handleDepartment}>
+                                <option value="CSE">Choose</option>
+                                <option value="CSE">CSE</option>
+                                <option value="CSE">ECE</option>
+                                <option value="CSE">IT</option>
+                                <option value="CSE">AIDS</option>
+                            </select>
+                            
+
+                            <button onClick={handleNext} >Next Page</button>
+                        </div>    
+           
                     </form>
                 </div>
             </div>
-            {formSubmitted && 
+            
+                
+            
+        </div>
+        
+    )
+}
+
+const SecondPage = ({data,onSubmit}) =>{
+
+    
+    
+    
+    
+    const[EmployeeID,setEmployeeID]=useState('');
+    const[Salary,setSalary]=useState('');
+    const[Destination,setDestination]=useState('');
+
+    
+    
+   
+
+    
+    
+
+   
+
+    
+
+    const handleSubmit = () => {
+        
+        const additionalData = { EmployeeID, Salary, Destination };
+        onSubmit({ ...data,additionalData });
+        console.log(data,additionalData);
+    };
+
+ 
+    return (
+        <div className='Main_class'>
+            <div className='form-con'> 
+                <div className='form-box'>
+                    <div className='text-area'>
+                        <img src={img1} alt="Image1"  />
+                    </div>  
+                    <form  onSubmit={handleSubmit}>
+                        <div className='form-text-con'>
+                            <p>Employee Details</p>
+                            <p>Page 2</p>
+                        </div>
+                        
+                        <div className='inpute'>
+                            
+                            
+                        
+                            <input type="number" placeholder="Empy-ID" onChange={(e)=>{setEmployeeID(e.target.value)}} required/>  <input type="number" placeholder="Salary Details" onChange={(e)=>{setSalary(e.target.value)}} required/> 
+                           <input type="text" placeholder="Designation" onChange={(e)=>{setDestination(e.target.value)}} required/> 
+                                                    
+                        </div>
+                       
+                        <button type="submit" className='sumbtn' >Submit</button>
+                        
+           
+                    </form>
+                </div>
+            </div>
+            
+                
+            
+        </div>
+        
+    )
+}
+
+
+const Home = ()=>{
+
+    // useEffect(() => {
+    
+    //     fetchEmployeeData();
+    // }, []);
+
+   
+
+    const [currentPage,setCurrentPage]=useState(1);
+    const [formData,setFormData]=useState({});
+
+    const handleNextPage = (data) =>{
+        setCurrentPage(2);
+        setFormData(data);
+        console.log('Next Button Get')
+    }
+    const [formSubmitted,setformsubmitted]=useState(false);
+    
+    const handleSubmit =(data)=>{
+        
+        console.log(data,1);
+        
+       
+        axios.post('http://localhost:5000/Employee',{data})
+        .then(
+        res=>alert("Successfully Inserted "))
+        
+        .catch(err=>alert(err,"error"));
+        
+        setformsubmitted(true);
+        
+        
+    }
+
+    // const [employeeData, setEmployeeData] = useState([]);
+    // const fetchEmployeeData = async () => {
+    //     try {
+    //     const response = await axios.get('http://localhost:5000/employee');
+        
+    //     setEmployeeData(response.data);
+    //     } catch (error) {
+    //     console.error('Error fetching employee data:', error);
+    //     }
+    // };
+   
+
+    return(
+        <div>
+            {currentPage === 1 && <FirstPage onNext={handleNextPage} />}
+            {currentPage === 2 && <SecondPage data={formData} onSubmit={handleSubmit} />}
+            {/* {formSubmitted && 
             <div className='table_show'>
                 <h2>Employee Data</h2>
-                <div className='head'>
-                    <NavLink to='/'>
-                        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/back.png" alt="back" />
-                    </NavLink>
-                    
-                </div>
+               
                 <table>
                     <thead>
                     <tr>
@@ -189,11 +271,8 @@ const Home = () =>{
                     ))}
                     </tbody>
                 </table>
-            </div>}
-                
-            
+            </div>} */}
         </div>
-        
     )
 }
 export default Home
