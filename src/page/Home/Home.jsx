@@ -31,7 +31,7 @@ const Home = () =>{
         
         const shouldReset = window.confirm("Are you sure you want to reset the form?");
         if (shouldReset) {
-         
+        
           formRef.current.reset();
          
           setBirthDate('');
@@ -88,7 +88,7 @@ const Home = () =>{
     };
     const handleSubmit =(e)=>{
         e.preventDefault();
-        
+        console.log("1");
         console.log(Name,birthDate, age,Experience,Department,Address,EmployeeID,Salary,Destination,11);
         axios.post('http://localhost:5000/Employee',{Name,birthDate, age,Experience,Department,Address,EmployeeID,Salary,Destination})
         .then(
