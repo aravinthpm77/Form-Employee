@@ -121,6 +121,8 @@ const FirstPage = ({onNext}) =>{
 }
 
 const SecondPage = ({data,onSubmit}) =>{
+    // console.log(data);
+    // console.log(onSubmit);
 
     
     
@@ -129,6 +131,8 @@ const SecondPage = ({data,onSubmit}) =>{
     const[EmployeeID,setEmployeeID]=useState('');
     const[Salary,setSalary]=useState('');
     const[Destination,setDestination]=useState('');
+    const[additionalData, setAdditionalData] = useState([]);
+    const [formFinal, setFormFinal] =useState({...data});
 
     
     
@@ -141,11 +145,22 @@ const SecondPage = ({data,onSubmit}) =>{
 
     
 
-    const handleSubmit = () => {
-        
-        const additionalData = { EmployeeID, Salary, Destination };
-        onSubmit({ ...data,additionalData });
-        console.log(data,additionalData);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // const additionalData={EmployeeID,Salary,Destination};
+        setAdditionalData({EmployeeID,Salary,Destination})
+        setFormFinal({
+            Name: data.Name,
+            birthDate: data.birthDate,
+            age:data.age,
+            Experience:data.Experience,
+            Department:data.Department,
+            EmployeeID,
+            Salary,
+            Destination
+        })
+        console.log(formFinal);
+        onSubmit(formFinal)
     };
 
  
@@ -156,7 +171,7 @@ const SecondPage = ({data,onSubmit}) =>{
                     <div className='text-area'>
                         <img src={img1} alt="Image1"  />
                     </div>  
-                    <form  onSubmit={handleSubmit}>
+                    <form >
                         <div className='form-text-con'>
                             <p>Employee Details</p>
                             <p>Page 2</p>
@@ -171,7 +186,7 @@ const SecondPage = ({data,onSubmit}) =>{
                                                     
                         </div>
                        
-                        <button type="submit" className='sumbtn' >Submit</button>
+                        <button type="submit" className='sumbtn' onClick={handleSubmit}>Submit</button>
                         
            
                     </form>
@@ -188,10 +203,10 @@ const SecondPage = ({data,onSubmit}) =>{
 
 const Home = ()=>{
 
-    // useEffect(() => {
+    useEffect(() => {
     
-    //     fetchEmployeeData();
-    // }, []);
+        fetchEmployeeData();
+    }, []);
 
    
 
@@ -201,6 +216,8 @@ const Home = ()=>{
     const handleNextPage = (data) =>{
         setCurrentPage(2);
         setFormData(data);
+        // console.log(data)
+
         console.log('Next Button Get')
     }
     const [formSubmitted,setformsubmitted]=useState(false);
@@ -211,33 +228,37 @@ const Home = ()=>{
         
        
         axios.post('http://localhost:5000/Employee',{data})
-        .then(
-        res=>alert("Successfully Inserted "))
-        
-        .catch(err=>alert(err,"error"));
+        .then(res => {
+            
+            alert("Successfully Inserted ");
+        })
+        .catch(err => {
+            console.error('Error submitting data:', err);
+            alert("Error: Unable to submit data");
+        });
         
         setformsubmitted(true);
         
         
     }
 
-    // const [employeeData, setEmployeeData] = useState([]);
-    // const fetchEmployeeData = async () => {
-    //     try {
-    //     const response = await axios.get('http://localhost:5000/employee');
+    const [employeeData, setEmployeeData] = useState([]);
+    const fetchEmployeeData = async () => {
+        try {
+        const response = await axios.get('http://localhost:5000/employee');
         
-    //     setEmployeeData(response.data);
-    //     } catch (error) {
-    //     console.error('Error fetching employee data:', error);
-    //     }
-    // };
+        setEmployeeData(response.data);
+        } catch (error) {
+        console.error('Error fetching employee data:', error);
+        }
+    };
    
 
     return(
         <div>
             {currentPage === 1 && <FirstPage onNext={handleNextPage} />}
             {currentPage === 2 && <SecondPage data={formData} onSubmit={handleSubmit} />}
-            {/* {formSubmitted && 
+            {formSubmitted && 
             <div className='table_show'>
                 <h2>Employee Data</h2>
                
@@ -271,7 +292,7 @@ const Home = ()=>{
                     ))}
                     </tbody>
                 </table>
-            </div>} */}
+            </div>}
         </div>
     )
 }
