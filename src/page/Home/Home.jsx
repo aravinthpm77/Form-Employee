@@ -67,10 +67,10 @@ const FirstPage = ({onNext}) =>{
 
   
   const handleNext = ()=>{
-
-    console.log(Name,birthDate,age,Experience,Department);
+    
+        console.log(Name,birthDate,age,Experience,Department);
     onNext({Name,birthDate, age,Experience,Department});
-  }
+    }
     
     return (
         <div className='Main_class'>

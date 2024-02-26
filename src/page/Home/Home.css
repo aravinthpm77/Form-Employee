@@ -154,9 +154,7 @@ form .dropdown .Depart{
     margin-left:0px ;
     color:rgb(110, 110, 110);
 }
-form .inpute .nextpage-btn{
-    width:
-}
+
 form .dropdown .Departments{
     border:none;
     background-color: #f1f1f1;
@@ -216,6 +214,25 @@ form .sumbtn:hover{
     color:rgba(29, 29, 29, 0.838);
 }
 
+table {
+    margin:50px 100px;
+    
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+th, td {
+
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background-color: #f2f2f2;
+}
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
 @media (max-width:500px) {
     .form-con{
         
