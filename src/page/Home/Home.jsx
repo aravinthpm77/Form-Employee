@@ -95,19 +95,22 @@ const FirstPage = ({onNext}) =>{
                                 <p>Age: {age==null ||age}</p>
                             </div>
                             <input type="number" placeholder='Experience'  onChange={(e)=>{setExperience(e.target.value)}} required/>
+                            <div className='dropdown'>
+                                <label for="Department" className='Depart'>Department</label>
+                                <select className='Departments' id="depart" name="Departments" onChange={handleDepartment}>
+                                    <option value="NULL">Choose</option>
+                                    <option value="CSE">CSE</option>
+                                    <option value="ECE">ECE</option>
+                                    <option value="IT">IT</option>
+                                    <option value="AIDS">AIDS</option>
+                                    <option value="CSBS">CSBS</option>
+                                </select>
+
+                            </div>
                             
-                            <label for="Department" className='Depart'>Choose Department</label>
-                            <select className='Departments' id="depart" name="Departments" onChange={handleDepartment}>
-                                <option value="NULL">Choose</option>
-                                <option value="CSE">CSE</option>
-                                <option value="ECE">ECE</option>
-                                <option value="IT">IT</option>
-                                <option value="AIDS">AIDS</option>
-                                <option value="CSBS">CSBS</option>
-                            </select>
                             
 
-                            <button onClick={handleNext} >Next Page</button>
+                            <button onClick={handleNext}  className='nextpage-btn'>Next Page</button>
                         </div>    
            
                     </form>
