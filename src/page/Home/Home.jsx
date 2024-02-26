@@ -98,11 +98,12 @@ const FirstPage = ({onNext}) =>{
                             
                             <label for="Department" className='Depart'>Choose Department</label>
                             <select className='Departments' id="depart" name="Departments" onChange={handleDepartment}>
-                                <option value="CSE">Choose</option>
+                                <option value="NULL">Choose</option>
                                 <option value="CSE">CSE</option>
-                                <option value="CSE">ECE</option>
-                                <option value="CSE">IT</option>
-                                <option value="CSE">AIDS</option>
+                                <option value="ECE">ECE</option>
+                                <option value="IT">IT</option>
+                                <option value="AIDS">AIDS</option>
+                                <option value="CSBS">CSBS</option>
                             </select>
                             
 
