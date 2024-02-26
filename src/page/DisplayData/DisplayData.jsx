@@ -12,7 +12,7 @@ const DisplayData = () => {
 
   const fetchEmployeeData = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/employee');
+      const response = await axios.get('https://font-emp.onrender.com//employee');
       
       setEmployeeData(response.data);
     } catch (error) {

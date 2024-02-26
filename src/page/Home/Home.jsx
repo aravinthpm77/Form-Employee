@@ -228,7 +228,7 @@ const Home = ()=>{
         console.log(data,1);
         
        
-        axios.post('http://localhost:5000/Employee',{data})
+        axios.post('https://font-emp.onrender.com/Employee',{data})
         .then(res => {
             
             alert("Successfully Inserted ");
@@ -246,7 +246,7 @@ const Home = ()=>{
     const [employeeData, setEmployeeData] = useState([]);
     const fetchEmployeeData = async () => {
         try {
-        const response = await axios.get('http://localhost:5000/employee');
+        const response = await axios.get('https://font-emp.onrender.com/employee');
         
         setEmployeeData(response.data);
         } catch (error) {
