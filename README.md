@@ -1,8 +1,9 @@
 # Employee Form Full Stack Project :
 
-Link of the Project [Create React App](https://form-employee.vercel.app/).
+Link of the Project [Employee Form - Vercel](https://form-employee.vercel.app/).
 
-## Available Scripts
+## Emoployee Front End Repo
 
-In the project directory, you can run:
+Tools Used :
+React Js,Javascript, Tailwind, CSS , HTML
 
