@@ -235,7 +235,7 @@ form .sumbtn:hover{
     
     top:calc(50%+30px);
     
-    transform: translate(-105%,10%);
+    transform: translate(-105%,-20%);
     max-height:635px;
     border-radius: 10px;
     background-color: white;
